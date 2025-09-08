@@ -2,6 +2,12 @@ package com.example.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface ProductRepository extends JpaRepository<Product,Long> {
+
+
+    // Custom query to find words starting with input
+    List<Product> findByNameStartingWithIgnoreCase(String name);
 
 }

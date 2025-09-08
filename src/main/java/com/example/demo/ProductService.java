@@ -16,4 +16,9 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return repo.findAll();
     }
+
+    // ✅ Return Product list, not just names
+    public List<Product> searchProducts(String query) {
+        return repo.findByNameStartingWithIgnoreCase(query);
+    }
 }

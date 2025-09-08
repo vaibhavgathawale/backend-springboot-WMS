@@ -9,9 +9,10 @@ import java.sql.Blob;
 import java.util.List;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Table(name= "Product")
 public class Product {
 
     @Id
@@ -29,4 +30,6 @@ public class Product {
 
     private String image;
     private boolean isNew;
+
+
 }
