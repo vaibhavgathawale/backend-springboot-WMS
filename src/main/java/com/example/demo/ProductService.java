@@ -17,8 +17,29 @@ public class ProductService {
         return repo.findAll();
     }
 
-    // ✅ Return Product list, not just names
+    // ✅ Return Product list, not just names/// OLD ONe
+//    public List<Product> searchProductsOLDAPI(String query) {
+//        return repo.findByNameStartingWithIgnoreCase(query);
+//    }
+
+    // Enhanced search with multiple strategies
     public List<Product> searchProducts(String query) {
-        return repo.findByNameStartingWithIgnoreCase(query);
+        if (query == null || query.trim().isEmpty()) {
+            return getAllProducts();
+        }
+
+        String searchQuery = query.trim();
+
+        // For very short queries, use startsWith
+        if (searchQuery.length() <= 2) {
+            return repo.findByNameStartingWithIgnoreCase(searchQuery);
+        }
+
+        // For longer queries, use contains for better results
+        return repo.findByNameContainingIgnoreCase(searchQuery);
+    }
+    // Get products by slug
+    public List<Product> getProductsBySlug(String slug) {
+        return repo.findBySlugContainingIgnoreCase(slug);
     }
 }

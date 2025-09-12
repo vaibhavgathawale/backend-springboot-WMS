@@ -26,10 +26,15 @@ public class Product {
     @ElementCollection
     private List<String> sizes;
 
+    @Transient // This prevents it from being stored in database
     private String selectedSize;
 
     private String image;
     private boolean isNew;
+
+    // Add this field for cart functionality (should NOT be persisted)
+    @Transient // This prevents it from being stored in database
+    private Integer quantity = 0;
 
 
 }

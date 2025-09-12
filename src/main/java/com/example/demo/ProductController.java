@@ -37,6 +37,24 @@ public class ProductController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    // New endpoint: Get products by slug
+    @GetMapping("/slug/{slug}")
+    public List<Product> getProductsBySlug(@PathVariable String slug) {
+        return service.getProductsBySlug(slug);
+    }
 
+    // New endpoint: Get featured/new products
+    @GetMapping("/featured")
+    public List<Product> getFeaturedProducts() {
+        return repository.findByIsNewTrue();
+    }
+
+    // New endpoint: Get products by price range
+    @GetMapping("/price-range")
+    public List<Product> getProductsByPriceRange(
+            @RequestParam double min,
+            @RequestParam double max) {
+        return repository.findByPriceBetween(min, max);
+    }
 
 }
